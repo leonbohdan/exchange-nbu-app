@@ -1,6 +1,6 @@
 # exchange-nbu-app
 
-This template should help get you started developing with Vue 3 in Vite.
+This project created with Vue 3 in Vite and Vuetify 3.
 
 ## Recommended IDE Setup
 
@@ -15,11 +15,19 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ```sh
 npm install
 ```
+or
+```sh
+yarn
+```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
+```
+or
+```sh
+yarn dev
 ```
 
 ### Compile and Minify for Production
@@ -27,9 +35,17 @@ npm run dev
 ```sh
 npm run build
 ```
+or
+```sh
+yarn bulid
+```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
 npm run lint
+```
+or
+```sh
+yarn lint
 ```
