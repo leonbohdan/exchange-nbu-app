@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { format } from 'date-fns';
 import { VDataTable } from 'vuetify/labs/components';
 import { useExchangeRate } from '@/stores/useExchangeRate.js';
 
@@ -40,6 +41,37 @@ const headers = ref([
     align: 'center',
   },
 ]);
+
+const addExchangeRate = (raw) => {
+  console.log('addExchangeRate', raw);
+};
+
+const editExchangeRate = (raw) => {
+  console.log('editExchangeRate', raw);
+};
+
+const removeExchangeRate = (raw) => {
+  console.log('removeExchangeRate', raw);
+};
+
+const actions = [
+  {
+    name: 'Add exchange rate',
+    icon: 'mdi-plus-circle-outline',
+    isShow: true,
+    action: (raw) => addExchangeRate(raw),
+  }, {
+    name: 'Edit exchange rate',
+    icon: 'mdi-pencil-outline',
+    isShow: true,
+    action: (raw) => editExchangeRate(raw),
+  }, {
+    name: 'Remove exchange rate',
+    icon: 'mdi-delete-outline',
+    isShow: true,
+    action: (raw) => removeExchangeRate(raw),
+  },
+];
 </script>
 
 <template>
@@ -47,7 +79,11 @@ const headers = ref([
     <v-expand-transition>
       <v-row dense align="center">
         <v-col class="pa-4 mr-auto">
-          Date: {{ new Date() }}
+          <span class="font-weight-bold">
+            Current date:
+          </span>
+
+          {{ format(new Date(), 'dd MMMM yyyy') }}
         </v-col>
       </v-row>
     </v-expand-transition>
@@ -57,8 +93,32 @@ const headers = ref([
       :items="exchangeRate.exchangeRateList"
       :loading="exchangeRate.exchangeRateListLoading"
       :items-per-page="10"
-    />
-    <!--    sdf-->
-    <!--  </VDataTable>-->
+    >
+      <template #item.actions="{ item }">
+        <template v-for="({name, isShow, icon, action}, i) in actions">
+          <v-btn
+            v-if="isShow"
+            :key="i"
+            icon
+            elevation="0"
+            @click="action(item.raw)"
+          >
+            <v-icon :icon="icon"/>
+
+            <v-tooltip
+              activator="parent"
+              location="bottom"
+            >
+              {{ name }}
+            </v-tooltip>
+          </v-btn>
+        </template>
+      </template>
+    </VDataTable>
   </v-card>
 </template>
+
+<style lang="sass">
+.v-table > .v-table__wrapper > table > thead > tr > th
+  background-color: #F5F5F5
+</style>
