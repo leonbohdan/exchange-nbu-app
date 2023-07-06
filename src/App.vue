@@ -1,13 +1,12 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import HeaderLayout from "@/layouts/HeaderLayout.vue";
+import HeaderLayout from '@/layouts/HeaderLayout.vue';
+import FooterLayout from '@/layouts/FooterLayout.vue';
 </script>
 
 <template>
   <v-layout ref="app" class="rounded rounded-md">
-    <v-app-bar color="indigo-lighten-5" name="app-bar">
-      <HeaderLayout/>
-    </v-app-bar>
+    <HeaderLayout/>
 
     <v-main class="d-flex align-center justify-center" style="min-height: 100vh;">
       <v-container>
@@ -15,14 +14,6 @@ import HeaderLayout from "@/layouts/HeaderLayout.vue";
       </v-container>
     </v-main>
 
-    <v-footer
-      app
-      name="footer"
-      color="indigo-lighten-1"
-    >
-      <v-container>
-        footer
-      </v-container>
-    </v-footer>
+    <FooterLayout/>
   </v-layout>
 </template>
