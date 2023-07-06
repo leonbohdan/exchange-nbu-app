@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import {PAGE_NAME} from "@/constants/pages.constants.js";
 import { useRouter } from 'vue-router';
+import { PAGE_NAME } from '@/constants/pages.constants.js';
 
 const router = useRouter();
 

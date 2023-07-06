@@ -9,7 +9,7 @@ import HeaderLayout from "@/layouts/HeaderLayout.vue";
       <HeaderLayout/>
     </v-app-bar>
 
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+    <v-main class="d-flex align-center justify-center" style="min-height: 100vh;">
       <v-container>
         <RouterView/>
       </v-container>
