@@ -78,7 +78,18 @@ const actions = [
   <v-card border>
     <v-expand-transition>
       <v-row dense align="center">
-        <v-col class="pa-4 mr-auto">
+        <v-col cols="3">
+          <v-text-field
+            label="Search"
+            prepend-inner-icon="mdi-magnify"
+            variant="outlined"
+            density="compact"
+            hide-details
+            class="ma-2"
+          />
+        </v-col>
+
+        <v-col cols="auto" class="pa-4 ml-auto">
           <span class="font-weight-bold">
             Current date:
           </span>
