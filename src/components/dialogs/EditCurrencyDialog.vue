@@ -61,7 +61,7 @@ const handleSaveCurrency = () => {
     @close-dialog="closeDialog"
   >
     <v-form ref="editCurrencyFormRef">
-      <v-row dense="compact">
+      <v-row density="compact">
         <v-col cols="12" class="d-flex align-center justify-center">
           <span class="font-weight-bold mr-2">
             Date:

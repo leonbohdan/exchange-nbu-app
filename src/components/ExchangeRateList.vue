@@ -27,7 +27,7 @@ const {
 
 <template>
   <v-expand-transition>
-    <v-row dense align="center">
+    <v-row density="compact" align="center">
       <v-col cols="12" md="3">
         <v-text-field
           v-model="search"
