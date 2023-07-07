@@ -59,7 +59,6 @@ export function useExchangeRateList() {
   ]);
 
   const removeExchangeRate = () => {
-    console.log('removeExchangeRate', deleteCurrencyId.value);
     savedExchangeRate.removeExchangeRates(deleteCurrencyId.value);
     showConfirmDialog.value = false;
     deleteCurrencyId.value = null;
@@ -124,15 +123,12 @@ export function useExchangeRateList() {
   });
 
   const handleDate = () => {
-    console.log('handleDate', chosenDate.value);
-    console.log('handleDate parse', format(new Date(parse(chosenDate.value, 'yyyy.MM.dd', new Date())), 'yyyyMMdd'));
     const formattedDate = format(new Date(parse(chosenDate.value, 'yyyy.MM.dd', new Date())), 'yyyyMMdd');
     dateSearchExchangeRate.setChosenDate(formattedDate);
   };
 
   watch(() => dateSearchExchangeRate.params.date,
     (value) => {
-      console.log('dateSearchExchangeRate.params.date', value);
       if (value) {
         dateSearchExchangeRate.getList();
       }
