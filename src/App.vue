@@ -13,7 +13,7 @@ savedExchangeRate.getList();
   <v-layout ref="app" class="rounded rounded-md">
     <HeaderLayout/>
 
-    <v-main class="d-flex align-center justify-center" style="min-height: 100vh;">
+    <v-main class="d-flex" style="min-height: 100vh;">
       <v-container>
         <RouterView/>
       </v-container>

@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue';
 import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
 import { DIALOG_TYPE } from '@/constants/dialogTypes.constants.js';
 import BaseDialog from '@/components/base/BaseDialog.vue';
+import { is } from 'date-fns/locale';
 
 const savedExchangeRate = savedExchangeRateStore();
 
@@ -29,12 +30,12 @@ watch(() => savedExchangeRate.editCurrencyDialog.editData,
   { immediate: true },
 );
 
-const isEditType = computed(() => {
+const isEditTypeDialog = computed(() => {
   return savedExchangeRate.editCurrencyDialog.type === DIALOG_TYPE.Edit;
 });
 
 const title = computed(() => {
-  return isEditType.value ? 'Edit currency' : 'Add currency';
+  return isEditTypeDialog.value ? 'Edit currency' : 'Add currency';
 });
 
 const closeDialog = () => {
@@ -61,7 +62,7 @@ const handleSaveCurrency = () => {
     @close-dialog="closeDialog"
   >
     <v-form ref="editCurrencyFormRef">
-      <v-row dense>
+      <v-row dense="compact">
         <v-col cols="12" class="d-flex align-center justify-center">
           <span class="font-weight-bold mr-2">
             Date:
@@ -79,7 +80,21 @@ const handleSaveCurrency = () => {
 
           <v-icon size="small" icon="mdi-arrow-right" class="mx-6"/>
 
-          UAH: {{ editData.rate }}
+          UAH:
+
+          <v-text-field
+            v-if="isEditTypeDialog"
+            v-model="editData.rate"
+            variant="outlined"
+            density="compact"
+            hide-details
+            style="max-width: 100px;"
+            class="ml-1"
+          />
+
+          <template v-else>
+            {{ editData.rate }}
+          </template>
         </v-col>
       </v-row>
     </v-form>
