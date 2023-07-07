@@ -3,7 +3,6 @@ import { ref, computed, watch } from 'vue';
 import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
 import { DIALOG_TYPE } from '@/constants/dialogTypes.constants.js';
 import BaseDialog from '@/components/base/BaseDialog.vue';
-import { is } from 'date-fns/locale';
 
 const savedExchangeRate = savedExchangeRateStore();
 
