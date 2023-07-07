@@ -2,7 +2,7 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import { getExchangeList } from '@/api/config.js';
 import { format } from 'date-fns';
 
-const currentDate = format(new Date(), 'yyyy.MM.dd');
+const currentDate = format(new Date(), 'yyyyMMdd');
 
 export const dateSearchExchangeRateStore = defineStore('dateSearchExchangeRate', {
   state: () => ({
@@ -12,7 +12,7 @@ export const dateSearchExchangeRateStore = defineStore('dateSearchExchangeRate',
 
     params: {
       json: '',
-      data: currentDate,
+      date: currentDate,
     },
   }),
 
@@ -30,6 +30,13 @@ export const dateSearchExchangeRateStore = defineStore('dateSearchExchangeRate',
       } finally {
         this.listLoading = false;
       }
+    },
+
+    setChosenDate(date) {
+      this.params = {
+        ...this.params,
+        date,
+      };
     },
   },
 });

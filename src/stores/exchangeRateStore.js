@@ -9,7 +9,6 @@ export const exchangeRateStore = defineStore('exchangeRate', {
 
     params: {
       json: '',
-      data: null,
     },
   }),
 

@@ -1,15 +1,28 @@
 <script setup>
 import { VDataTable } from 'vuetify/labs/components';
 import { useExchangeRateList } from '@/composables/useExchangeRateList.js';
-import { exchangeRateStore } from '@/stores/exchangeRateStore.js';
 import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 import EditCurrencyDialog from '@/components/dialogs/EditCurrencyDialog.vue';
 import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue';
 
 const savedExchangeRate = savedExchangeRateStore();
-const exchangeRate = exchangeRateStore();
 
-const { search, headers, searchedItems, actions, currentDate, showConfirmDialog, removeExchangeRate } = useExchangeRateList();
+const {
+  search,
+  headers,
+  searchedItems,
+  actions,
+  currentDate,
+  showConfirmDialog,
+  removeExchangeRate,
+  loading,
+  isSearchPage,
+  chosenDate,
+  formattedDate,
+  handleDate,
+} = useExchangeRateList();
 </script>
 
 <template>
@@ -27,7 +40,21 @@ const { search, headers, searchedItems, actions, currentDate, showConfirmDialog,
         />
       </v-col>
 
-      <v-col cols="auto" class="pa-4 ml-auto">
+      <v-spacer/>
+
+      <v-col v-if="isSearchPage" cols="auto" class="pa-4">
+        <VueDatePicker
+          v-model="chosenDate"
+          model-type="yyyy.MM.dd"
+          :enable-time-picker="false"
+          :format="formattedDate"
+          :teleport="true"
+          :vertical="true"
+          @update:model-value="handleDate"
+        />
+      </v-col>
+
+      <v-col v-else cols="auto" class="pa-4 ml-auto">
         <span class="font-weight-bold">
           Current date:
         </span>
@@ -40,7 +67,7 @@ const { search, headers, searchedItems, actions, currentDate, showConfirmDialog,
   <VDataTable
     :headers="headers"
     :items="searchedItems"
-    :loading="exchangeRate.exchangeRateListLoading"
+    :loading="loading"
     :items-per-page="10"
   >
     <template #item.actions="{ item }">
