@@ -2,6 +2,11 @@
 import { RouterView } from 'vue-router';
 import HeaderLayout from '@/layouts/HeaderLayout.vue';
 import FooterLayout from '@/layouts/FooterLayout.vue';
+import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
+
+const savedExchangeRate = savedExchangeRateStore();
+
+savedExchangeRate.getList();
 </script>
 
 <template>

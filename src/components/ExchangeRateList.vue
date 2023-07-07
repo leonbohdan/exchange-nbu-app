@@ -2,10 +2,14 @@
 import { VDataTable } from 'vuetify/labs/components';
 import { useExchangeRateList } from '@/composables/useExchangeRateList.js';
 import { exchangeRateStore } from '@/stores/exchangeRateStore.js';
+import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
+import EditCurrencyDialog from '@/components/dialogs/EditCurrencyDialog.vue';
+import ConfirmDialog from '@/components/dialogs/ConfirmDialog.vue';
 
+const savedExchangeRate = savedExchangeRateStore();
 const exchangeRate = exchangeRateStore();
 
-const { search, headers, searchedItems, actions, currentDate } = useExchangeRateList();
+const { search, headers, searchedItems, actions, currentDate, showConfirmDialog, removeExchangeRate } = useExchangeRateList();
 </script>
 
 <template>
@@ -60,4 +64,15 @@ const { search, headers, searchedItems, actions, currentDate } = useExchangeRate
       </template>
     </template>
   </VDataTable>
+
+  <EditCurrencyDialog
+    v-model="savedExchangeRate.editCurrencyDialog.isOpen"
+  />
+
+  <ConfirmDialog
+    v-model="showConfirmDialog"
+    title="Delete currency"
+    message="Are you sure, do you want to delete this currency?"
+    @confirm-value="removeExchangeRate"
+  />
 </template>

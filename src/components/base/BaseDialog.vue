@@ -22,15 +22,15 @@ defineProps({
   },
 });
 
-const emits = defineEmits(['update:model-value', 'close-dialog', 'save']);
+const emit = defineEmits(['update:model-value', 'close-dialog', 'save']);
 
 const handleClose = () => {
-  emits('update:model-value', false);
-  emits('close-dialog');
+  emit('update:model-value', false);
+  emit('close-dialog');
 };
 
 const handleSave = () => {
-  emits('save');
+  emit('save');
 };
 </script>
 

@@ -1,13 +1,19 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import { useLocalStorage } from '@/composables/useLocalStorage.js';
 
-const { getSavedExchangeRates, setSavedExchangeRates, removeSavedExchangeRates } = useLocalStorage();
+const { getSavedExchangeRates, setSavedExchangeRates } = useLocalStorage();
 
 export const savedExchangeRateStore = defineStore('savedExchangeRate', {
   state: () => ({
     list: [],
     listTotal: 0,
     listLoading: false,
+
+    editCurrencyDialog: {
+      isOpen: false,
+      type: null,
+      editData: null,
+    },
   }),
 
   actions: {
@@ -29,13 +35,22 @@ export const savedExchangeRateStore = defineStore('savedExchangeRate', {
     },
 
     setExchangeRates(exchangeRate) {
-      setSavedExchangeRates(exchangeRate);
+      this.list = this.list.filter(exchange => exchange.r030 !== exchangeRate.r030);
       this.list.unshift(exchangeRate);
+      setSavedExchangeRates(this.list);
     },
 
-    removeExchangeRates() {
-      removeSavedExchangeRates();
-      this.list = [];
+    removeExchangeRates(id) {
+      this.list = this.list.filter(exchange => exchange.r030 !== id);
+      setSavedExchangeRates(this.list);
+    },
+
+    updateEditCurrencyDialog(isOpen, type, editData) {
+      this.editCurrencyDialog = {
+        isOpen,
+        type,
+        editData,
+      };
     },
   },
 });

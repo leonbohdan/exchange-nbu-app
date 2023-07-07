@@ -1,12 +1,22 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { PAGE_NAME } from '@/constants/pages.constants.js';
 
 const router = useRouter();
+const route = useRoute();
 
-const isActivePage = ref(PAGE_NAME.Home);
+const isActivePage = ref(null);
 const showMobileDialog = ref(false);
+
+watch(() => route.name,
+  (value) => {
+    if (value) {
+      isActivePage.value = value;
+    }
+  },
+  { immediate: true },
+);
 
 const openPage = (page) => {
   const routerPage = page === PAGE_NAME.Home ? '' : page;

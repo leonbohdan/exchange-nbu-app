@@ -5,6 +5,7 @@ import { exchangeRateStore } from '@/stores/exchangeRateStore.js';
 import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
 import { dateSearchExchangeRateStore } from '@/stores/dateSearchExchangeRateStore.js';
 import { PAGE_NAME } from '@/constants/pages.constants.js';
+import { DIALOG_TYPE } from '@/constants/dialogTypes.constants.js';
 
 export function useExchangeRateList() {
   const exchangeRate = exchangeRateStore();
@@ -14,6 +15,8 @@ export function useExchangeRateList() {
   const route = useRoute();
 
   const search = ref(null);
+  const showConfirmDialog = ref(false);
+  const deleteCurrencyId = ref(null);
 
   const headers = ref([
     {
@@ -49,16 +52,16 @@ export function useExchangeRateList() {
     },
   ]);
 
-  const addExchangeRate = (raw) => {
-    console.log('addExchangeRate', raw);
+  const removeExchangeRate = () => {
+    console.log('removeExchangeRate', deleteCurrencyId.value);
+    savedExchangeRate.removeExchangeRates(deleteCurrencyId.value);
+    showConfirmDialog.value = false;
+    deleteCurrencyId.value = null;
   };
 
-  const editExchangeRate = (raw) => {
-    console.log('editExchangeRate', raw);
-  };
-
-  const removeExchangeRate = (raw) => {
-    console.log('removeExchangeRate', raw);
+  const handleDeleteExchangeRate = (id) => {
+    deleteCurrencyId.value = id;
+    showConfirmDialog.value = true;
   };
 
   const isHomePage = computed(() => {
@@ -78,17 +81,17 @@ export function useExchangeRateList() {
       name: 'Add exchange rate',
       icon: 'mdi-plus-circle-outline',
       isShow: !isChangedPage.value,
-      action: (raw) => addExchangeRate(raw),
+      action: (raw) => savedExchangeRate.updateEditCurrencyDialog(true, DIALOG_TYPE.Add, raw),
     }, {
       name: 'Edit exchange rate',
       icon: 'mdi-pencil-outline',
-      isShow: true,
-      action: (raw) => editExchangeRate(raw),
+      isShow: isChangedPage.value,
+      action: (raw) => savedExchangeRate.updateEditCurrencyDialog(true, DIALOG_TYPE.Edit, raw),
     }, {
       name: 'Remove exchange rate',
       icon: 'mdi-delete-outline',
       isShow: isChangedPage.value,
-      action: (raw) => removeExchangeRate(raw),
+      action: (raw) => handleDeleteExchangeRate(raw.r030),
     },
   ];
 
@@ -105,6 +108,8 @@ export function useExchangeRateList() {
   const currentDate = format(new Date(), 'dd.MM.yyyy');
 
   return {
+    showConfirmDialog,
+    removeExchangeRate,
     search,
     headers,
     actions,
