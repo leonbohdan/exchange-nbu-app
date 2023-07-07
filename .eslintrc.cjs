@@ -9,6 +9,8 @@ module.exports = {
     // 0 - "off"
     // 1 - "warn"
     // 2 - "error"
+    'quotes': [2, 'single'],
+    'object-curly-spacing': [2, 'always'],
     'semi': [2, 'always'],
     'comma-dangle': [2, 'always-multiline'],
     'indent': ['error', 2, {

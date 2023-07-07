@@ -1,8 +1,14 @@
 <script setup>
+import ExchangeRateList from '@/components/ExchangeRateList.vue';
+import { savedExchangeRateStore } from '@/stores/savedExchangeRateStore.js';
+
+const savedExchangeRate = savedExchangeRateStore();
+
+savedExchangeRate.getList();
 </script>
 
 <template>
-  <div class="d-flex align-center justify-space-around">
-    <h1>Changed Page</h1>
-  </div>
+  <v-card border>
+    <ExchangeRateList />
+  </v-card>
 </template>

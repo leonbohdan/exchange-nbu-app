@@ -1,8 +1,14 @@
 <script setup>
+import ExchangeRateList from '@/components/ExchangeRateList.vue';
+import { dateSearchExchangeRateStore } from '@/stores/dateSearchExchangeRateStore.js';
+
+const dateSearchExchangeRate = dateSearchExchangeRateStore();
+
+dateSearchExchangeRate.getList();
 </script>
 
 <template>
-  <div class="d-flex align-center justify-space-around">
-    <h1>Search Page</h1>
-  </div>
+  <v-card border>
+    <ExchangeRateList />
+  </v-card>
 </template>

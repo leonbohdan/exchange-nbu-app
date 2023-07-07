@@ -9,7 +9,10 @@
     color="indigo-lighten-1"
   >
     <v-container>
-      leonbohdan
+      Made by
+      <a class="text-shades-white" href="https://github.com/leonbohdan" target="_blank">
+        leonbohdan
+      </a>
     </v-container>
   </v-footer>
 </template>
