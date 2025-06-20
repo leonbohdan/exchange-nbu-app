@@ -1,6 +1,6 @@
 # exchange-nbu-app
 
-This project was created with Vue 3 in Vite and Vuetify 3.
+This project was created with Vue 3, Vite and Vuetify 3.
 
 [Task](https://docs.google.com/document/d/1KiUiKuQ71UmwBzTGfU3PLyVvjJg6vOTANOOOzPIq3BE/edit)
 
